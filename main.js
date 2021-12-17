@@ -13,10 +13,12 @@ app.on('ready', ()=>{
     //create new window
     mainWindow = new BrowserWindow({ 
         show: true,
-        width:800,
-        maxWidth:800,
-        maxHeight:800,
-        height:800,
+        width:250,
+        maxWidth:250,
+        maxHeight:250,
+        height:250,
+        minWidth:250,
+        minHeight:250,
         webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
