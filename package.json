@@ -1,0 +1,22 @@
+{
+  "name": "aga",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Konrad Bolesławski",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^14.0.1",
+    "electron-builder": "^22.14.5",
+    "electron-packager": "^15.4.0"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "json-2-csv": "^3.15.0",
+    "os": "^0.1.2",
+    "pdf-parse": "^1.1.1"
+  }
+}
