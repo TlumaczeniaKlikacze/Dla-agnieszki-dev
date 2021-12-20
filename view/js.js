@@ -34,7 +34,7 @@ const clear_and_write = (d)=>{
     let data = d
     let tmp_keys
     for(let i=0;i<data.length;i++){
-        tmp_keys = Object.keys(data[0])
+        tmp_keys = Object.keys(data[i])
         for(let j=0;j<tmp_keys.length;j++){
             if(data[i][tmp_keys[j]].includes('zł'))
             data[i][tmp_keys[j]] = data[i][tmp_keys[j]].replace('zł','')
@@ -56,31 +56,32 @@ const clear_and_write = (d)=>{
 
 const conver = (el)=>{
     return new Promise((res,rej)=>{
-        tmp=[]
+        tmpe=[]
         csv({ignoreEmpty: false,delimiter:";",noheader:true})
         .fromString(el)
         .subscribe((jsonObj,index)=>{
-            tmp.push(jsonObj)
+            tmpe.push(jsonObj)
         })
         .on('done',async()=>{
-            res(tmp)
+            res(tmpe)
         })
     })
 }
 
-const conver_to_json = ()=>{
+const conver_to_json = async()=>{
     let array_of_ready_csv = []
-    text_from_pdfs.forEach(async(element,index,array)=>{
-        let tmp;
-        pdf_splitet = element.split("Dokument wygenerowany przez IdoSell")
+    let tmpa;
+
+    for(let z =0;z<text_from_pdfs.length;z++){
+        pdf_splitet = text_from_pdfs[z].split("Dokument wygenerowany przez IdoSell")
         for(let i =0;i<pdf_splitet.length;i++){
-            tmp = await conver(pdf_splitet[i])
-            array_of_ready_csv = array_of_ready_csv.concat(tmp)
+            tmpa = await conver(pdf_splitet[i])
+            array_of_ready_csv = array_of_ready_csv.concat(tmpa)
         }
-        if(index +1 == array.length)
+        if(z+1 == text_from_pdfs.length)
         clear_and_write(array_of_ready_csv)
-       
-    })
+    }
+
 
 }
 
